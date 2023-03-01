@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+:css
+    body {
+    margin: 0px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    }
+
+    /* header styling */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #1F2937;
+        padding: 5px 15%;
+        margin: 0px;
+    }
+
+    header p {
+        font-size: 24px;
+        color: #F9FAF8;
+        font-weight: bold;
+
+    }
+
+    header a {
+        font-size: 18px;
+        color: #E5E7EB;
+        margin: 8px;
+    }
+
+    /* main styling */
+
+    .main {
+        background: #1F2937;
+        margin: 0px;
+        display: flex;
+        gap: 32px;
+        padding: 8% 15%;
+        color: white;
+    }
+
+    .left {
+        flex: 1 0 auto;
+        width: 40%;
+        font-size: larger;
+    }
+
+    .placeholder-image {
+        height: 300px;
+        width: 50%;
+        flex: 1 0 auto;
+        background: grey;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main button {
+        border: 0px;
+        border-radius: 8px;
+        padding: 8px 48px;
+        background-color: #3882F6;
+        font-size: larger;
+        color: white;
+    }
+
+    .main .left h1 {
+        margin: 0px;
+        font-size: 48px;
+        font-weight: bolder;
+        width: 450px;
+    }
+
+    .main .left p {
+        font-size: 18px;
+        color: #E5E7EB;
+    }
+
+    /*info styling*/
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        margin-bottom: 50px;
+    }
+
+    .info h1 {
+        font-size: 36px;
+        font-weight: bolder;
+        color: #1F2937
+    }
+
+    .img-text-blocks {
+        display: flex;
+        gap: 96px;
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .block {
+        width: 200px;
+    }
+
+    .placeholder {
+        border-width: 5px;
+        border-style: solid;
+        border-color: #3882F6;
+        border-radius: 16px;
+        width: 200px;
+        height: 200px;
+    }
+
+    /*quote styling*/
+    .thor {
+        background: #E5E7EB;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 8% 20%;
+    }
+
+    .quote {
+        font-size: 36px;
+        font-style: italic;
+        color: #1F2937;
+        font-weight: 100;
+    }
+
+    .quotient {
+        align-self: flex-end;
+        font-weight: bold;
+        font-size: 24px;
+        margin-right: 64px;
+    }
+
+    /*call to action styling*/
+    .action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5%;
+        gap: 50px;
+    }
+
+    .box {
+        background: #3882F6;
+        border-radius: 8px;
+        color: white;
+        width: 60%;
+        padding: 3% 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .box button {
+        background: none;
+        color: white;
+        font-weight: bold;
+        font-size: large;
+        border-width: 3px;
+        border-color: white;
+        border-radius: 8px;
+        border-style: solid;
+        height: 48px;
+        padding: 8px 50px;
+    }
+
+    /*footer*/
+    footer {
+        background: #1F2937;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 32px;
+        color: white;
+    }
+
+    .form {
+        padding-top: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 32px;
+    }
+
+:javascript
+    function submitForm(event) {
+        event.preventDefault();
+        const url = "http://localhost:8080/api/v1/signup";
+        const formData = new FormData(event.target);
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+        console.log(data);
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Success:", data);
+            window.location.replace("/login");
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    }
+
+<head>
+    <meta charset="UTF-8">
+    <title>Virus Total :: Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <a href="/"><img src="https://cdn-icons-png.flaticon.com/512/2749/2749484.png" alt="logo" width="100" height="100"></a>
+        <div class="links">
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        </div>
+    </header>
+    <div class="form">
+        <form onsubmit="submitForm(event)">
+            <label for="userEmail">User email:</label><br>
+            <input type="text" id="userEmail" name="userEmail"></br>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"></br>
+            <label for="password:">Password:</label><br>
+            <input type="text" name="password"></br>
+            <label for="name:">Name:</label><br>
+            <input type="text" name="name"></br>
+            <label for="desc:">Description:</label><br>
+            <input type="text" name="desc"></br>
+            <input type="submit" value="Submit"> </form>
+    </div>
+</body>
+
+</html>

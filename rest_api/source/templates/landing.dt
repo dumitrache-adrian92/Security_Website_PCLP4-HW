@@ -1,0 +1,7 @@
+// landing.dt
+doctype html
+html
+    head
+        title Hello, World '#{username}'
+    body
+        <button type="button">Click Me!</button>
